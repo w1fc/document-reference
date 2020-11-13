@@ -813,3 +813,434 @@ _.nth(array, -2);
 ### 参考
 - [https://lodash.com/docs/4.17.15#nth](https://lodash.com/docs/4.17.15#nth)
 
+## pull
+
+```js
+_.pull(array, [values])
+```
+
+移除数组 `array` 中所有和给定值相等的元素，使用 `SameValueZero` 进行全等比较。
+
+注意：和 `_.without` 方法不同，这个方法会改变数组。使用 `_.remove` 从一个数组中移除元素。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+- `[values] (...*)`: 要删除的值。
+
+### 返回
+- `(Array)`: 返回 `array`。
+
+### 例子
+
+```js
+var array = [1, 2, 3, 1, 2, 3];
+
+_.pull(array, 2, 3);
+console.log(array);
+// => [1, 1]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#pull](https://lodash.com/docs/4.17.15#pull)
+
+## pullAll
+
+```js
+_.pullAll(array, values)
+```
+
+这个方法类似 `_.pull`，区别是这个方法接收一个要移除值的数组。
+
+注意：不同于 `_.difference`, 这个方法会改变数组 `array`。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+- `values (Array)`: 要移除值的数组。
+
+### 返回
+- `(Array)`: 返回 `array`。
+
+### 例子
+
+```js
+var array = [1, 2, 3, 1, 2, 3];
+
+_.pullAll(array, [2, 3]);
+console.log(array);
+// => [1, 1]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#pullAll](https://lodash.com/docs/4.17.15#pullAll)
+
+## pullAllBy
+
+```js
+_.pullAllBy(array, values, [iteratee=_.identity])
+```
+
+这个方法类似于 `_.pullAll`，区别是这个方法接受一个 `iteratee` 调用 `array` 和 `values` 的每个值以产生一个值，通过产生的值进行了比较。`iteratee` 会传入一个参数：`(value)`。
+
+注意：不同于 `_.differenceBy`, 这个方法会改变数组 `array`。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+- `values (Array)`: 要移除值的数组。
+- `[iteratee=_.identity] (Array|Function|Object|string)`: `iteratee` 调用每个元素。
+
+### 返回
+- `(Array)`: 返回 `array`。
+
+### 例子
+
+```js
+var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+
+_.pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
+console.log(array);
+// => [{ 'x': 2 }]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#pullAllBy](https://lodash.com/docs/4.17.15#pullAllBy)
+
+## pullAllWith
+
+```js
+_.pullAllWith(array, values, [comparator])
+```
+
+这个方法类似于 `_.pullAll`，区别是这个方法接受 `comparator` 调用 `array` 中的元素和 `values` 比较。`comparator` 会传入两个参数：`(arrVal, othVal)`。
+
+注意: 和 `_.differenceWith` 不同, 这个方法会改变数组 `array`。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+- `values (Array)`: 要移除值的数组。
+- `[comparator] (Function)`: `comparator` 调用每个元素。
+
+### 返回
+- `(Array)`: 返回 `array`。
+
+### 例子
+
+```js
+var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
+
+_.pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+console.log(array);
+// => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#pullAllWith](https://lodash.com/docs/4.17.15#pullAllWith)
+
+## pullAt
+
+```js
+_.pullAt(array, [indexes])
+```
+
+根据索引 `indexes`，移除 `array` 中对应的元素，并返回被移除元素的数组。
+
+注意: 和 `_.at` 不同, 这个方法会改变数组 `array`。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+- `[indexes] (...(number|number[]))`: 要移除元素的索引。
+
+### 返回
+- `(Array)`: 返回移除元素组成的新数组。
+
+### 例子
+
+```js
+var array = [5, 10, 15, 20];
+var evens = _.pullAt(array, 1, 3);
+
+console.log(array);
+// => [5, 15]
+
+console.log(evens);
+// => [10, 20]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#pullAt](https://lodash.com/docs/4.17.15#pullAt)
+
+## remove
+
+```js
+_.remove(array, [predicate=_.identity])
+```
+
+移除数组中 `predicate` 返回为真值的所有元素，并返回移除元素组成的数组。`predicate` 会传入 3 个参数：`(value, index, array)`。
+
+注意: 和 `_.filter` 不同, 这个方法会改变数组 `array`。使用 `_.pull` 来根据提供的 `value` 值从数组中移除元素。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+- `[predicate=_.identity] (Array|Function|Object|string)`: 每次迭代调用的函数。
+
+### 返回
+- `(Array)`: 返回移除元素组成的新数组。
+
+### 例子
+
+```js
+var array = [1, 2, 3, 4];
+var evens = _.remove(array, function (n) {
+    return n % 2 == 0;
+});
+
+console.log(array);
+// => [1, 3]
+
+console.log(evens);
+// => [2, 4]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#remove](https://lodash.com/docs/4.17.15#remove)
+
+## reverse
+
+```js
+_.reverse(array)
+```
+
+反转 `array`，使得第一个元素变为最后一个元素，第二个元素变为倒数第二个元素，依次类推。
+
+注意: 这个方法会改变原数组 `array`，基于 [Array#reverse](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)。
+
+### 参数
+- `array (Array)`: 要修改的数组。
+
+### 返回
+- `(Array)`: 返回 `array`。
+
+### 例子
+
+```js
+var array = [1, 2, 3];
+
+_.reverse(array);
+// => [3, 2, 1]
+
+console.log(array);
+// => [3, 2, 1]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#reverse](https://lodash.com/docs/4.17.15#reverse)
+
+## slice
+
+```js
+_.slice(array, [start=0], [end=array.length])
+```
+
+裁剪数组 `array`，从 `start` 位置开始到 `end` 结束，但不包括 `end` 本身的位置。
+
+注意: 这个方法用于代替 [Array#slice](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) 来确保数组正确返回。
+
+### 参数
+- `array (Array)`: 要裁剪数组。
+- `[start=0] (number)`: 开始位置。
+- `[end=array.length] (number)`: 结束位置。
+
+### 返回
+- `(Array)`: 返回数组 `array` 裁剪部分的新数组。
+
+### 例子
+
+### 参考
+- [https://lodash.com/docs/4.17.15#slice](https://lodash.com/docs/4.17.15#slice)
+
+## sortedIndex
+
+```js
+_.sortedIndex(array, value)
+```
+
+使用二分检索来决定 `value` 值应该插入到数组中尽可能小的索引位置，以保证 `array` 的排序。
+
+### 参数
+- `array (Array)`: 要检查的排序数组。
+- `value (*)`: 要评估的值。
+
+### 返回
+- `(number)`: 返回 `value` 值应该在数组 `array` 中插入的索引位置 `index`。
+
+### 例子
+
+```js
+_.sortedIndex([30, 50], 40);
+// => 1
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedIndex](https://lodash.com/docs/4.17.15#sortedIndex)
+
+## sortedIndexBy
+
+```js
+_.sortedIndexBy(array, value, [iteratee=_.identity])
+```
+
+这个方法类似 `_.sortedIndex` ，不同之处在于它接受一个 `iteratee` ，调用每一个数组的元素，返回结果和 `value` 比较来计算排序。`iteratee` 会传入一个参数：`(value)`。
+
+### 参数
+- `array (Array)`: 要检查的排序数组。
+- `value (*)`: 要评估的值。
+- `[iteratee=_.identity] (Array|Function|Object|string)`: 迭代函数，调用每个元素。
+
+### 返回
+- `(number)`: 返回 `value` 值应该在数组 `array` 中插入的索引位置 `index`。
+
+### 例子
+
+```js
+var objects = [{ 'x': 4 }, { 'x': 5 }];
+
+_.sortedIndexBy(objects, { 'x': 4 }, function (o) { return o.x; });
+// => 0
+
+// The `_.property` iteratee shorthand.
+_.sortedIndexBy(objects, { 'x': 4 }, 'x');
+// => 0
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedIndexBy](https://lodash.com/docs/4.17.15#sortedIndexBy)
+
+## sortedIndexOf
+
+```js
+_.sortedIndexOf(array, value)
+```
+
+这个方法类似 `_.indexOf`，不同之处在于它是在已经排序的数组 `array` 上执行二分检索。
+
+### 参数
+- `array (Array)`: 要搜索的数组。
+- `value (*)`: 搜索的值。
+
+### 返回
+- `(number)`: 返回匹配值的索引位置，否则返回 `-1`。
+
+### 例子
+
+```js
+_.sortedIndexOf([4, 5, 5, 5, 6], 5);
+// => 1
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedIndexOf](https://lodash.com/docs/4.17.15#sortedIndexOf)
+
+## sortedLastIndex
+
+```js
+_.sortedLastIndex(array, value)
+```
+
+此方法类似于 `_.sortedIndex`，不同之处在于它返回 `value` 值在 `array` 数组中尽可能大的索引位置 `index`。
+
+### 参数
+- `array (Array)`: 要检查的排序数组。
+- `value (*)`: 要评估的值。
+
+### 返回
+- `(number)`: 返回 `value` 值应该在数组 `array` 中插入的索引位置 `index`。
+
+### 例子
+
+```js
+_.sortedLastIndex([4, 5, 5, 5, 6], 5);
+// => 4
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedLastIndex](https://lodash.com/docs/4.17.15#sortedLastIndex)
+
+## sortedLastIndexBy
+
+```js
+_.sortedLastIndexBy(array, value, [iteratee=_.identity])
+```
+
+这个方法类似 `_.sortedLastIndex` ，不同之处在于它接受一个迭代函数 `iteratee` ，调用每一个数组 `array` 元素，返回结果和 `value` 值比较来计算排序。`iteratee` 会传入一个参数：`(value)`。
+
+### 参数
+- `array (Array)`: 要检查的排序数组。
+- `value (*)`: 要评估的值。
+- `[iteratee=_.identity] (Array|Function|Object|string)`: 迭代函数，调用每个元素。
+
+### 返回
+- `(number)`: 返回 `value` 值应该在数组 `array` 中插入的索引位置 `index`。
+
+### 例子
+
+```js
+var objects = [{ 'x': 4 }, { 'x': 5 }];
+
+_.sortedLastIndexBy(objects, { 'x': 4 }, function (o) { return o.x; });
+// => 1
+
+// The `_.property` iteratee shorthand.
+_.sortedLastIndexBy(objects, { 'x': 4 }, 'x');
+// => 1
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedLastIndexBy](https://lodash.com/docs/4.17.15#sortedLastIndexBy)
+
+## sortedLastIndexOf
+
+```js
+_.sortedLastIndexOf(array, value)
+```
+
+这个方法类似 `_.lastIndexOf`，不同之处在于它是在已经排序的数组 `array` 上执行二分检索。
+
+### 参数
+- `array (Array)`: 要搜索的数组。
+- `value (*)`: 搜索的值。
+
+### 返回
+- `(number)`: 返回匹配值的索引位置，否则返回 `-1`。
+
+### 例子
+
+```js
+_.sortedLastIndexOf([4, 5, 5, 5, 6], 5);
+// => 3
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedLastIndexOf](https://lodash.com/docs/4.17.15#sortedLastIndexOf)
+
+## sortedUniq
+
+```js
+_.sortedUniq(array)
+```
+
+这个方法类似 `_.uniq`，不同之处在于它会优化排序数组。
+
+### 参数
+- `array (Array)`: 要检查的数组。
+
+### 返回
+- `(Array)`: 返回一个新的不重复的数组。
+
+### 例子
+
+```js
+_.sortedUniq([1, 1, 2]);
+// => [1, 2]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)
