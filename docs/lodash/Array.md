@@ -1244,3 +1244,551 @@ _.sortedUniq([1, 1, 2]);
 
 ### 参考
 - [https://lodash.com/docs/4.17.15#sortedUniq](https://lodash.com/docs/4.17.15#sortedUniq)
+
+
+## sortedUniqBy
+
+```js
+_.sortedUniqBy(array, [iteratee])
+```
+
+这个方法类似 `_.uniqBy`，不同之处在于它会优化排序数组。
+
+### 参数
+- `array (Array)`: 要检查的数组。
+- `[iteratee] (Function)`: 迭代函数，调用每个元素。
+
+### 返回
+- `(Array)`: 返回一个新的不重复的数组。
+
+### 例子
+
+```js
+_.sortedUniqBy([1.1, 1.2, 2.3, 2.4], Math.floor);
+// => [1.1, 2.3]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#sortedUniqBy](https://lodash.com/docs/4.17.15#sortedUniqBy)
+
+## tail
+
+```js
+_.tail(array)
+```
+
+获取除了 `array` 数组中第一个元素以外的全部元素。
+
+### 参数
+- `array (Array)`: 要检索的数组。
+
+### 返回
+- `(Array)`: 返回 `array` 数组的切片（除了 `array` 数组中第一个元素以外的全部元素）。
+
+### 例子
+
+```js
+_.tail([1, 2, 3]);
+// => [2, 3]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#tail](https://lodash.com/docs/4.17.15#tail)
+
+## take
+
+```js
+_.take(array, [n=1])
+```
+
+创建一个数组切片，从 `array` 数组的起始元素开始提取 `n` 个元素。
+
+### 参数
+- `array (Array)`: 要检索的数组。
+- `[n=1] (number)`: 要提取的元素个数。
+
+### 返回
+- `(Array)`: 返回 `array` 数组的切片（从起始元素开始 `n` 个元素）。
+
+### 例子
+
+```js
+_.take([1, 2, 3]);
+// => [1]
+
+_.take([1, 2, 3], 2);
+// => [1, 2]
+
+_.take([1, 2, 3], 5);
+// => [1, 2, 3]
+
+_.take([1, 2, 3], 0);
+// => []
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#take](https://lodash.com/docs/4.17.15#take)
+
+## takeRight
+
+```js
+_.takeRight(array, [n=1])
+```
+
+创建一个数组切片，从 `array` 数组的最后一个元素开始提取 `n` 个元素。
+
+### 参数
+- `array (Array)`: 要检索的数组。
+- `[n=1] (number)`: 要提取的元素个数。
+
+### 返回
+- `(Array)`: 返回 `array` 数组的切片（从结尾元素开始 `n` 个元素）。
+
+### 例子
+
+```js
+_.takeRight([1, 2, 3]);
+// => [3]
+
+_.takeRight([1, 2, 3], 2);
+// => [2, 3]
+
+_.takeRight([1, 2, 3], 5);
+// => [1, 2, 3]
+
+_.takeRight([1, 2, 3], 0);
+// => []
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#takeRight](https://lodash.com/docs/4.17.15#takeRight)
+
+## takeRightWhile
+
+```js
+_.takeRightWhile(array, [predicate=_.identity])
+```
+
+从 `array` 数组的最后一个元素开始提取元素，直到 `predicate` 返回假值。`predicate` 会传入三个参数：`(value, index, array)`。
+
+### 参数
+- `array (Array)`: 要检索的数组。
+- `[predicate=_.identity] (Array|Function|Object|string)`: 每次迭代调用的函数。
+
+### 返回
+- `(Array)`: 返回 `array` 数组的切片。
+
+### 例子
+
+```js
+var users = [
+    { 'user': 'barney', 'active': true },
+    { 'user': 'fred', 'active': false },
+    { 'user': 'pebbles', 'active': false }
+];
+
+_.takeRightWhile(users, function (o) { return !o.active; });
+// => objects for ['fred', 'pebbles']
+
+// The `_.matches` iteratee shorthand.
+_.takeRightWhile(users, { 'user': 'pebbles', 'active': false });
+// => objects for ['pebbles']
+
+// The `_.matchesProperty` iteratee shorthand.
+_.takeRightWhile(users, ['active', false]);
+// => objects for ['fred', 'pebbles']
+
+// The `_.property` iteratee shorthand.
+_.takeRightWhile(users, 'active');
+// => []
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#takeRightWhile](https://lodash.com/docs/4.17.15#takeRightWhile)
+
+## takeWhile
+
+```js
+_.takeWhile(array, [predicate=_.identity])
+```
+
+从 `array` 数组的起始元素开始提取元素，直到 `predicate` 返回假值。`predicate` 会传入三个参数：`(value, index, array)`。
+
+### 参数
+- `array (Array)`: 需要处理的数组
+- `[predicate=_.identity] (Array|Function|Object|string)`: 每次迭代调用的函数。
+
+### 返回
+- `(Array)`: 返回 `array` 数组的切片。
+
+### 例子
+
+```js
+var users = [
+    { 'user': 'barney', 'active': false },
+    { 'user': 'fred', 'active': false },
+    { 'user': 'pebbles', 'active': true }
+];
+
+_.takeWhile(users, function (o) { return !o.active; });
+// => objects for ['barney', 'fred']
+
+// The `_.matches` iteratee shorthand.
+_.takeWhile(users, { 'user': 'barney', 'active': false });
+// => objects for ['barney']
+
+// The `_.matchesProperty` iteratee shorthand.
+_.takeWhile(users, ['active', false]);
+// => objects for ['barney', 'fred']
+
+// The `_.property` iteratee shorthand.
+_.takeWhile(users, 'active');
+// => []
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#takeWhile](https://lodash.com/docs/4.17.15#takeWhile)
+
+## union
+
+```js
+_.union([arrays])
+```
+
+创建一个按顺序排列的唯一值的数组。所有给定数组的元素值使用 `SameValueZero` 做等值比较。（注： `arrays` 的并集，按顺序返回，返回数组的元素是唯一的）
+
+### 参数
+- `[arrays] (...Array)`: 要检查的数组。
+
+### 返回
+- `(Array)`: 返回一个新的联合数组。
+
+### 例子
+
+```js
+_.union([2], [1, 2]);
+// => [2, 1]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#union](https://lodash.com/docs/4.17.15#union)
+
+## unionBy
+
+```js
+_.unionBy([arrays], [iteratee=_.identity])
+```
+
+这个方法类似 `_.union` ，除了它接受一个迭代函数 `iteratee` ，调用每一个数组 `arrays` 的每个元素以产生唯一性计算的标准。`iteratee` 会传入一个参数：`(value)`。
+
+### 参数
+- `[arrays] (...Array)`: 要检查的数组。
+- `[iteratee=_.identity] (Array|Function|Object|string)`: 迭代函数，调用每个元素。
+
+### 返回
+- `(Array)`: 返回一个新的联合数组。
+
+### 例子
+
+```js
+_.unionBy([2.1], [1.2, 2.3], Math.floor);
+// => [2.1, 1.2]
+
+// The `_.property` iteratee shorthand.
+_.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+// => [{ 'x': 1 }, { 'x': 2 }]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#unionBy](https://lodash.com/docs/4.17.15#unionBy)
+
+## unionWith
+
+```js
+_.unionWith([arrays], [comparator])
+```
+
+这个方法类似 `_.union` ，不同之处在于它接受一个 `comparator` 调用比较 `arrays` 数组的每一个元素。`comparator` 调用时会传入 2 个参数：`(arrVal, othVal)`。
+
+### 参数
+- `[arrays] (...Array)`: 要检查的数组。
+- `[comparator] (Function)`: 比较函数，调用每个元素。
+
+### 返回
+- `(Array)`: 返回一个新的联合数组。
+
+### 例子
+
+```js
+var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+
+_.unionWith(objects, others, _.isEqual);
+// => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#unionWith](https://lodash.com/docs/4.17.15#unionWith)
+
+## unzip
+
+```js
+_.unzip(array)
+```
+
+这个方法类似于 `_.zip`，不同之处在于它接收分组元素的数组，并且创建一个数组，分组元素到打包前的结构。
+
+### 参数
+- `array (Array)`: 要处理的分组元素数组。
+
+### 返回
+- `(Array)`: 返回重组元素的新数组。
+
+### 例子
+
+```js
+var zipped = _.zip(['fred', 'barney'], [30, 40], [true, false]);
+// => [['fred', 30, true], ['barney', 40, false]]
+
+_.unzip(zipped);
+// => [['fred', 'barney'], [30, 40], [true, false]]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#unzip](https://lodash.com/docs/4.17.15#unzip)
+
+## unzipWith
+
+```js
+_.unzipWith(array, [iteratee=_.identity])
+```
+
+此方法类似于 `_.unzip`，不同之处在于它接受一个 `iteratee` 指定重组值应该如何被组合。`iteratee` 调用时会传入每个分组的值：`(...group)`。
+
+### 参数
+- `array (Array)`: 要处理的分组元素数组。
+- `[iteratee=_.identity] (Function)`: 这个函数用来组合重组的值。
+
+### 返回
+- `(Array)`: 返回重组元素的新数组。
+
+### 例子
+
+```js
+var zipped = _.zip([1, 2], [10, 20], [100, 200]);
+// => [[1, 10, 100], [2, 20, 200]]
+
+_.unzipWith(zipped, _.add);
+// => [3, 30, 300]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#unzipWith](https://lodash.com/docs/4.17.15#unzipWith)
+
+## without
+
+```js
+_.without(array, [values])
+```
+
+创建一个剔除所有给定值的新数组，剔除值的时候，使用 `SameValueZero` 做相等比较。
+
+注意: 不同于 `_.pull`, 这个方法会返回一个新数组。
+
+### 参数
+- `array (Array)`: 要检查的数组。
+- `[values] (...*)`: 要剔除的值。
+
+### 返回
+- `(Array)`: 返回过滤值后的新数组。
+
+### 例子
+
+```js
+_.without([2, 1, 2, 3], 1, 2);
+// => [3]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#without](https://lodash.com/docs/4.17.15#without)
+
+## xor
+
+```js
+_.xor([arrays])
+```
+
+创建一个给定数组唯一值的数组，使用 [symmetric difference](https://en.wikipedia.org/wiki/Symmetric_difference) 做等值比较。返回值的顺序取决于他们数组的出现顺序。
+
+### 参数
+- `[arrays] (...Array)`: 要检查的数组。
+
+### 返回
+- `(Array)`: 返回过滤值后的新数组。
+
+### 例子
+
+```js
+_.xor([2, 1], [2, 3]);
+// => [1, 3]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#xor](https://lodash.com/docs/4.17.15#xor)
+
+## xorBy
+
+```js
+_.xorBy([arrays], [iteratee=_.identity])
+```
+
+这个方法类似 `_.xor` ，不同之处在于它接受迭代器 `iteratee`，这个迭代器调用每一个数组 `arrays` 的每一个值，以生成比较的新值。`iteratee` 调用一个参数：`(value)`。
+
+### 参数
+- `[arrays] (...Array)`: 要检查的数组。
+- `[iteratee=_.identity] (Array|Function|Object|string)`: 调用每一个元素的迭代函数。
+
+### 返回
+- `(Array)`: 返回过滤值后的新数组。
+
+### 例子
+
+```js
+_.xorBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+// => [1.2, 3.4]
+
+// The `_.property` iteratee shorthand.
+_.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+// => [{ 'x': 2 }]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#xorBy](https://lodash.com/docs/4.17.15#xorBy)
+
+## xorWith
+
+```js
+_.xorWith([arrays], [comparator])
+```
+
+该方法是像 `_.xor`，不同之处在于它接受一个 `comparator` ，以调用比较数组的元素。`comparator` 调用 2 个参数：`(arrVal, othVal)`。
+
+### 参数
+- `[arrays] (...Array)`: 要检查的数组。
+- `[comparator] (Function)`: 调用每一个元素的比较函数。
+
+### 返回
+- `(Array)`: 返回过滤值后的新数组。
+
+### 例子
+
+```js
+var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+
+_.xorWith(objects, others, _.isEqual);
+// => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#xorWith](https://lodash.com/docs/4.17.15#xorWith)
+
+## zip
+
+```js
+_.zip([arrays])
+```
+
+创建一个分组元素的数组，数组的第一个元素包含所有给定数组的第一个元素，数组的第二个元素包含所有给定数组的第二个元素，以此类推。
+
+### 参数
+- `[arrays] (...Array)`: 要处理的数组。
+
+### 返回
+- `(Array)`: 返回分组元素的新数组。
+
+### 例子
+```js
+_.zip(['fred', 'barney'], [30, 40], [true, false]);
+// => [['fred', 30, true], ['barney', 40, false]]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#zip](https://lodash.com/docs/4.17.15#zip)
+
+## zipObject
+
+```js
+_.zipObject([props=[]], [values=[]])
+```
+
+这个方法类似 `_.fromPairs`，不同之处在于它接受 2 个数组，第一个数组中的值作为属性标识符（属性名），第二个数组中的值作为相应的属性值。
+
+### 参数
+- `[props=[]] (Array)`: 属性标识符。
+- `[values=[]] (Array)`: 属性值。
+
+### 返回
+- `(Object)`: 返回新对象。
+
+### 例子
+
+```js
+_.zipObject(['a', 'b'], [1, 2]);
+// => { 'a': 1, 'b': 2 }
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#zipObject](https://lodash.com/docs/4.17.15#zipObject)
+
+## zipObjectDeep
+
+```js
+_.zipObjectDeep([props=[]], [values=[]])
+```
+
+这个方法类似 `_.zipObject`，不同之处在于它支持属性路径。
+
+### 参数
+- `[props=[]] (Array)`: 属性标识符（属性名）。
+- `[values=[]] (Array)`: 属性值。
+
+### 返回
+- `(Object)`: 返回新对象。
+
+### 例子
+
+```js
+_.zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]);
+// => { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#zipObjectDeep](https://lodash.com/docs/4.17.15#zipObjectDeep)
+
+## zipWith
+
+```js
+_.zipWith([arrays], [iteratee=_.identity])
+```
+
+这个方法类似于 `_.zip`，不同之处在于它接受一个迭代函数 `iteratee`，来指定分组的值应该如何被组合。该 `iteratee` 调用每个组的元素： `(...group)`。
+
+### 参数
+- `[arrays] (...Array)`: 要处理的数组。
+- `[iteratee=_.identity] (Function)`: 函数用来组合分组的值。
+
+### 返回
+- `(Array)`: 返回分组元素的新数组。
+
+### 例子
+
+```js
+_.zipWith([1, 2], [10, 20], [100, 200], function (a, b, c) {
+    return a + b + c;
+});
+// => [111, 222]
+```
+
+### 参考
+- [https://lodash.com/docs/4.17.15#zipWith](https://lodash.com/docs/4.17.15#zipWith)
