@@ -1,0 +1,8 @@
+* [Function](ramda/Function)
+* [List](ramda/List)
+* [Logic](ramda/Logic)
+* [Math](ramda/Math)
+* [Object](ramda/Object)
+* [Relation](ramda/Relation)
+* [String](ramda/String)
+* [Type](ramda/Type)
