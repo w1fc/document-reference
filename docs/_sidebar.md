@@ -1,1 +1,2 @@
 * [lodash](lodash/)
+* [ramda](ramda/)
